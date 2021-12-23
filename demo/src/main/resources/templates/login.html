@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Page d'authentification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+			body{
+				background: url("https://agence-autrement.com/wp-content/uploads/2014/12/AWD_3D_-3Fond_1900.jpg") no-repeat center fixed;
+				background-size: cover;
+				display: flex;
+				align-items: 50%;
+				height: 80vh;
+			}
+        </style>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div>
+        <img src="https://www.1pcom.net/img/loginhead.jpg" style="max-width: 350px; margin: 0 auto; padding-top: 25px; padding-bottom:25px">
+    </div>
+    <div th:if="${param.error}">
+        <p class="text-danger">
+            Mot de passe ou nom de compte incorrect
+        </p>
+    </div>
+    <div th:if="${param.logout}">
+        <P style="font-weight:bold; color:white;">
+            Vous êtes déconnecté
+        </P>
+    </div>
+    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+        <div class="border border-secondary p-3 rounded">
+            <p>Login </p>
+            <p>
+                <input type="text" name="username" class="form-control" placeholder="Nom de compte" required autofocus/>
+            </p>
+            <p>
+                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
+            </p>
+
+            <p><input type="submit" value="Valider" class="btn btn-primary"/></p>
+        </div>
+    </form>
+    <br/>
+    <a href="/registration">Inscription</a>
+    
+</div>
+
+</body>
+</html>
