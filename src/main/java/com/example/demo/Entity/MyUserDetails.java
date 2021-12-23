@@ -14,8 +14,8 @@ public class MyUserDetails implements UserDetails {
 
 
     public MyUserDetails(User user){
-        this.username = user.getLogin();
-        this.password = user.getMdp();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
     }
 
     @Override

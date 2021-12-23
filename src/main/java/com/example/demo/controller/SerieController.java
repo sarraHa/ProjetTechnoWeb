@@ -68,7 +68,7 @@ public class SerieController {
         }
         String loginUserCourant = servlet.getRemoteUser();
         System.out.println(loginUserCourant);
-        Optional<User> userOpt = utilisateurRepository.findByLogin(loginUserCourant);
+        Optional<User> userOpt = utilisateurRepository.findByUsername(loginUserCourant);
         User user = userOpt.orElseThrow();
         Serie s = new Serie(titre,description,user);
         serieRepository.save(s);

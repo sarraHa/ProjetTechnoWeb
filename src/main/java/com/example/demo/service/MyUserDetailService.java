@@ -22,16 +22,18 @@ public class MyUserDetailService implements UserDetailsService {
     UserRepository utilisateurRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Optional<User> user =  utilisateurRepository.findByLogin(login);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("loadUserByUsernameloadUserByUsernameloadUserByUsername");
+
+        Optional<User> user =  utilisateurRepository.findByUsername(username);
         System.out.println("************************************");
 
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found : " + login));
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found : " + username));
 
         System.out.println("************************************");
 
-        System.out.println(user.orElseThrow().getLogin());
-        System.out.println(user.orElseThrow().getMdp());
+        System.out.println(user.orElseThrow().getUsername());
+        System.out.println(user.orElseThrow().getPassword());
 
         return user.map(MyUserDetails::new).get(); 
     }

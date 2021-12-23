@@ -30,17 +30,13 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
     public String registration(@ModelAttribute User user, Model model){
-        System.out.println("iciiiiiiiiiiiiiiiiiiiiiii");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println("iciiiiiiiiiiiiiiiiiiiiiii");
-
-        if(user.getMdp().isEmpty() || user.getLogin().isEmpty()){
+        if(user.getPassword().isEmpty() || user.getUsername().isEmpty()){
             // Ici si l'utilisateur a passer outre la vérification Js de la Vue, on redirige sur la page d'erreur? il faudrai definir un code 400.
             return "error";
         }
-        System.out.println("iciiiiiiiiiiiiiiiiiiiiiii");
 
-        user.setMdp(passwordEncoder.encode(user.getMdp()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
         return "redirect:/login"; // Le nom du fichier html du dossier template

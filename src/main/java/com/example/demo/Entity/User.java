@@ -17,45 +17,45 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String login;
-    private String mdp;
+    private String username;
+    private String password;
 
     @OneToMany(mappedBy = "createur",cascade = {CascadeType.ALL})
     private List<Serie> listSerie  = new ArrayList<>();
     
     public User(){}
     
-    public User(String login, String mdp){
-        this.login = login;
-        this.mdp = mdp;
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     /**
-     * @return the login
+     * @return the username
      */
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
      /**
-     * @param login 
+     * @param username 
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
      * @return 
      */
-    public String getMdp() {
-        return mdp;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param mdp 
+     * @param password 
      */
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

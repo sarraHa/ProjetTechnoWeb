@@ -8,6 +8,6 @@ import com.example.demo.Entity.User;
 
 
 public interface UserRepository extends CrudRepository<User,Long> {
-    Optional<User> findByLogin(String login);
+    Optional<User> findByUsername(String username);
 
 }

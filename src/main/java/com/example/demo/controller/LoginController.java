@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @Autowired  
-    UserRepository utilisateurRepository; 
+    UserRepository userRepository; 
 
 
     @RequestMapping("/login")
