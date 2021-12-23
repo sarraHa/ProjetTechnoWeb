@@ -6,52 +6,32 @@
       <title>Create an account</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <link href="/css/common.css" rel="stylesheet">
+
   </head>
 
-  <body style="max-width: 350px; margin: 0 auto;margin-top: 100px;">
-    <div class="container">
-        <form  class="form-signin" id="registrationForm" th:action="@{/registration}" th:object="${user}" method="post">
-            <h2 class="form-signin-heading">Create your account</h2>
-            <div class="form-group">
-                <p><input  onchange="inputError()" id="username" type="text" th:field="*{username}" name="username" class="form-control" placeholder="User name"/></p>
-            </div>
-            <div class="form-group">
-                <p><input onchange="inputError()" id="password" type="password" th:field="*{password}" name="password" class="form-control" placeholder="Password"/></p>
-            </div>
-            <div class="form-group">
-                <p><input onchange="inputError()" id="confirm" type="password" name="passwordConfirm" class="form-control" placeholder="confirm password"/></p>
-            </div>
-      
-            <p id="passwordError" style="display: none; color: red;"> Les mots de passes sont différents.</p>
-            <p id="emptyForm" style="display: none; color: red;"> Vous devez remplir tous les éléments du formulaire!</p>
+    <body style="max-width: 350px; margin: 0 auto;margin-top: 100px;">
+        <div class="container">
+            <form  class="form-signin" id="registrationForm" th:action="@{/registration}" th:object="${user}" method="post">
+                <h2 class="form-signin-heading">Create your account</h2>
+                <div class="form-group">
+                    <p><input  onchange="inputError()" id="username" type="text" th:field="*{username}" name="username" class="form-control" placeholder="User name"/></p>
+                </div>
+                <div class="form-group">
+                    <p><input onchange="inputError()" id="password" type="password" th:field="*{password}" name="password" class="form-control" placeholder="Password"/></p>
+                </div>
+                <div class="form-group">
+                    <p><input onchange="inputError()" id="confirm" type="password" name="passwordConfirm" class="form-control" placeholder="confirm password"/></p>
+                </div>
+                <p id="passwordError" style="display: none; color: red;"> Les mots de passes sont différents.</p>
+                <p id="emptyForm" style="display: none; color: red;"> Vous devez remplir tous les éléments du formulaire!</p>
+            </form>
+            <button id="validerForm" onclick="verificationFormulaire()" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 
-        </form>
-        <br/>
-        <button id="validerForm" onclick="verificationFormulaire()" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-        <h4 class="text-center"><a href="/login">Already registered? Sign in</a></h4>
+            <h4 class="text-center"><a href="/login">Already registered? Sign in</a></h4>
+        </div>
+        <script type="text/javascript"  th:src="@{/js/main.js}"></script>
 
-    </div>
-  </body>
-
-  <script>
-     function verificationFormulaire() {  
-        username = document.getElementById("username").value;
-        password = document.getElementById("password").value;
-        passwordConfirm = document.getElementById("confirm").value;
-        if(password != passwordConfirm){
-            document.getElementById("passwordError").style.display = "inline";
-        }else if(password.trim()== "" || passwordConfirm.trim() == "" || username.trim() == ""){
-            document.getElementById("emptyForm").style.display = "inline";
-        }else{
-            document.getElementById("registrationForm").submit();
-        }
-    }
-
-    function inputError(){
-        document.getElementById("passwordError").style.display = "none";
-        document.getElementById("emptyForm").style.display = "none";
-    }
-</script>
+    </body>
 
 </html>
 
