@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController  
-public class UtilisateurController {
+public class UserController {
 
     //autowired the StudentService class  
     @Autowired  
-    UserRepository utilisateurRepository;  
+    UserRepository userRepository;  
     /*
     @RequestMapping(value = "/inscription",method = RequestMethod.POST)
     public String inscription(@ModelAttribute Utilisateur utilisateur){
