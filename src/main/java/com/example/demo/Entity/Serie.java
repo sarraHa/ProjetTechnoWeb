@@ -11,7 +11,7 @@ public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titre;
+    private String title;
     private String description;
     private Date lastModif = new Date();
 
@@ -25,8 +25,8 @@ public class Serie {
 
     public Serie(){}
     
-    public Serie(String titre, String description, User createur ){
-        this.titre = titre;
+    public Serie(String title, String description, User createur ){
+        this.title = title;
         this.description = description;
         this.createur = createur;
     }
@@ -47,28 +47,28 @@ public class Serie {
 
 
         /**
-     * @return the titre
+     * @return the title
      */
-    public String getTitre() {
-        return titre;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param titre the titre to set
+     * @param title the title to set
      */
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setTitle(String title) {
+        this.title = title;
     }
     
      /**
-     * @return the titre
+     * @return the title
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @param titre the titre to set
+     * @param title the title to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -76,14 +76,14 @@ public class Serie {
 
 
      /**
-     * @return the titre
+     * @return the title
      */
     public Date getLastModif() {
         return lastModif;
     }
 
     /**
-     * @param titre the titre to set
+     * @param title the title to set
      */
     public void setLastModif(Date lastModif) {
         this.lastModif = lastModif;
