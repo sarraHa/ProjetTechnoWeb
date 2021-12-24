@@ -265,7 +265,7 @@ $(document).ready(function(){
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Follow Series</a>
+        <a class="navbar-brand" href="/">Follow Series</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -273,7 +273,7 @@ $(document).ready(function(){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/series">Series</a>
@@ -283,7 +283,7 @@ $(document).ready(function(){
               </li>
 
             <li class="nav-item">
-              <a class="nav-link disabled" href="/logout">Logout</a>
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
@@ -301,7 +301,7 @@ $(document).ready(function(){
 						<h2>Manage <b>Series</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+						<a  href="/serie/createSeries" class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add New Serie</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
 				</div>
@@ -318,7 +318,10 @@ $(document).ready(function(){
 						<th>Title</th>
 						<th>Description</th>
 						<th>Last Modification</th>
-						<th>Actions</th>
+						<th>Action</th>
+                        <th></th>
+						<th></th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -336,8 +339,13 @@ $(document).ready(function(){
 						<td th:text="${serie.title}"></td>
 						<td th:text="${serie.description}"></td>
 						<td th:text="${serie.lastModif}"></td>
+                        <td>
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Open">&#xE254;</i></a>
+						</td>
 						<td>
-							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+						</td>
+                        <td>
 							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 						</td>
 					</tr>
@@ -348,9 +356,9 @@ $(document).ready(function(){
 				<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
 				<ul class="pagination">
 					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
+					<li class="page-item active" ><a href="#" class="page-link">1</a></li>
 					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
+					<li class="page-item "><a href="#" class="page-link">3</a></li>
 					<li class="page-item"><a href="#" class="page-link">4</a></li>
 					<li class="page-item"><a href="#" class="page-link">5</a></li>
 					<li class="page-item"><a href="#" class="page-link">Next</a></li>

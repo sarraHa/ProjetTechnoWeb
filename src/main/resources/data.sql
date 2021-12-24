@@ -27,6 +27,9 @@ INSERT INTO serie(ID, description, last_modif, titre, createur_id ) VALUES(1, 'd
 
 INSERT INTO evenement (id, serie_id, valeur, date, commentaire) VALUES 
   (1, 1, 2.5, now(), 'un commentaire'),
+
+  INSERT INTO serie(ID, description, last_modif, title, createur_id ) VALUES(1, 'descriptiondescription', now(), 'title', 1), (2, 'descriptiondescription', now(), 'title', 1), (3, 'descriptiondescription', now(), 'title', 1);
+
 */
 
 

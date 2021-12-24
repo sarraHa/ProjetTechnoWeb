@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Entity.User;
 import com.example.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(){
+
+        System.out.println("loginloginlogin");
+
+        //userRepository.save(new User("a","$2a$10$3dS7CUOVQmMRoESWCKE38udWg7b/eQcZ6C9svzxx4bqApTfA98GyC"));
+        
 
         return "login";
     }
