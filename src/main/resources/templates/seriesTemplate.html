@@ -315,10 +315,9 @@ $(document).ready(function(){
 								<label for="selectAll"></label>
 							</span>
 						</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Phone</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Last Modification</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -335,9 +334,8 @@ $(document).ready(function(){
 						</td>
 
 						<td th:text="${serie.titre}"></td>
-						<td>thomashardy@mail.com</td>
-						<td>89 Chiaroscuro Rd, Portland, USA</td>
-						<td>(171) 555-2222</td>
+						<td th:text="${serie.description}"></td>
+						<td th:text="${serie.lastModif}"></td>
 						<td>
 							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
