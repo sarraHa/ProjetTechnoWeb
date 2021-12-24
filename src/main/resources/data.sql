@@ -22,6 +22,7 @@ INSERT INTO serie (id, description, last_modif, titre) VALUES
   (4, 'une description', now(), 'un titre');
 
 
+INSERT INTO user(ID, PASSWORD, USERNAME) VALUES(1, '1', '1');
 
 INSERT INTO evenement (id, serie_id, valeur, date, commentaire) VALUES 
   (1, 1, 2.5, now(), 'un commentaire'),

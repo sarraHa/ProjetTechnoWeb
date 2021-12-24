@@ -9,6 +9,10 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String accueil(Model model){
-        return "hello"; // Le nom du fichier html du dossier template
+        return "index"; 
+    }
+    @RequestMapping("/logout")
+    public String logout(){
+        return "logout"; 
     }
 }
