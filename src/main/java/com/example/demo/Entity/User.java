@@ -31,6 +31,13 @@ public class User {
     }
 
     /**
+     * @return ID
+    */
+    public Long getID() {
+        return this.id;
+    }
+
+    /**
      * @return the username
      */
     public String getUsername() {

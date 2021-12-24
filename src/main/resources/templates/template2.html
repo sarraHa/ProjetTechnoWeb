@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vos listes</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <style>
+			body{
+				background: url("https://agence-autrement.com/wp-content/uploads/2014/12/AWD_3D_-3Fond_1900.jpg") no-repeat center fixed;
+				background-size: cover;
+			}
+        </style>
+
+    </head>
+    <body style="margin-left:1%;">
+
+        <h1 th:inline="text">Salut [[${loginUserCourant}]]!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Se Déconnecter" class="btn btn-primary"/>
+        </form>
+
+        <h3>Vous pouvez ici consulter vos series. Cliquer sur les fonctionnalités  sur le bord d'une série afin de : </h3><br/>
+        <ul>
+            <li>Modifier le type de reprensentation</li>
+            <li>Ajouter un evenement </li>
+            <li>Partager la liste avec d'autres utilisateurs</li>
+            <li>Supprimer une série ou un evenement</li>
+            <li>Ajouter une série</li>
+            <li>Modifier les séries, les evenements, .... </li>
+
+        </ul>
+        <div>
+            <h3>Vous souhaitez créer une nouvelle série :</h3>
+            <button onclick="window.location.href='/serie/creation'" type="button" class="btn btn-primary" style="margin-left: 5%;">Créer une nouvelle série</button>
+        </div>
+
+        <h2>Vos séries : </h2>
+
+        <table th:each="serie : ${series}">
+            <hr>
+            <h3>Titre :</h3>
+            <p th:text="${serie.titre}"></p>
+            <h3>Description :</h3>
+            <p th:text="${serie.description}"></p>
+            <form  th:action="@{'/modifSerie/'+${serie.id}}" th:method="get">
+            <button type="submit" class="btn btn-primary" style="margin-right:1%;">
+                Modifier la série
+            </button>
+            </form>
+            <form th:action="@{'/serie/delete/'+${serie.id}}" th:method="delete" >
+                <button type="submit" class="btn btn-primary" style="margin-right:1%;">
+                    Supprimer la série
+                </button>
+            </form>
+            <form  th:action="@{'/ajoutEvenement/'+${serie.id}}" th:method="get">
+                <button type="submit" class="btn btn-primary" style="margin-right:1%;">
+                    Ajouter un évènement a la série.
+                </button>
+            </form>
+            <button th:onclick="|afficheChoix('${serie.id}')|" class="btn btn-primary">Partager la série avec un autre utilisateur</button>
+            <div th:id="'ajoutDroit'+${serie.id}" style="display: none;">
+                <form  th:action="@{'/partagerSerie/'+${serie.id}}" th:method="post">
+                    <input type="text" placeholder="Pseudo de l'utilisateur" th:name="login" required autofocus style="margin-top:1.1%; border-radius:5px;">
+                    <input type="radio" id="lecture" th:name="choix" name="choix" value="lecture"
+                           checked>
+                    <label for="lecture">Lecture</label>
+                    <input type="radio" id="ecriture" th:name="choix" name="choix" value="ecriture">
+                    <label for="ecriture">Ecriture</label>
+                    <button type="submit" class="btn btn-primary" style="margin-top:0.1%;">
+                        Ajouter les droits à l'utilisateurs
+                    </button>
+                </form>
+            </div>
+            <tr>
+                <th>Date</th>
+                <th>Valeur</th>
+            </tr>
+            <tr th:each="evenement : ${serie.listEvenement}">
+                <td th:text="${#dates.format(evenement.date,'dd-MM-yyyy HH:mm')}"></td>
+                <td th:text="${evenement.valeur}"></td>
+                <td>TAGS :</td>
+                <th:block th:each="tag : ${evenement.tags}">
+                    <td th:text="${tag.nom}"></td>
+                </th:block>
+                <td th:if="${evenement.commentaire}" th:text="${evenement.commentaire}"></td>
+                <td>
+                    <form  th:action="@{'/modifierEvenement/'+${evenement.id}}" th:method="get">
+                        <button type="submit" class="btn btn-primary">
+                            Modifier
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form  th:action="@{'/supprimerEvenement/'+${evenement.id}}" th:method="delete">
+                        <button type="submit" class="btn btn-primary">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+      
+    </body>
+</html>

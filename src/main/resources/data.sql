@@ -22,7 +22,8 @@ INSERT INTO serie (id, description, last_modif, titre) VALUES
   (4, 'une description', now(), 'un titre');
 
 
-INSERT INTO user(ID, PASSWORD, USERNAME) VALUES(1, '1', '1');
+INSERT INTO user(ID, PASSWORD, USERNAME) VALUES(1, '$2a$10$4Tt2qBo7ShCYlILu6rNTo.GJP6ViImZjSdM2ddN5q352DlMeSQt9i', 'a');
+INSERT INTO serie(ID, description, last_modif, titre, createur_id ) VALUES(1, 'descriptiondescription', now(), 'title', 1), (2, 'descriptiondescription', now(), 'title', 1), (3, 'descriptiondescription', now(), 'title', 1);
 
 INSERT INTO evenement (id, serie_id, valeur, date, commentaire) VALUES 
   (1, 1, 2.5, now(), 'un commentaire'),
