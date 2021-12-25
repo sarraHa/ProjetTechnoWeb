@@ -24,6 +24,13 @@ public interface  SerieRepository extends CrudRepository<Serie, Long>{
     @Query(value = "SELECT * FROM serie WHERE createur_id= :createurID ", nativeQuery = true)
     List<Serie> getSerieByUserId(@Param("createurID") Long userId);
 
+    
+    @Query(value = "select id, description, last_modif, title, createur_id from serie where id in (select id_serie from status t where t.id_user = :userId and  t.id_status = 0)", nativeQuery = true)
+    List<Serie> getReadSerieByUserId(@Param("userId") Long userId);
+//  INSERT INTO status(ID_serie, id_user, id_status ) VALUES(2, 3, 0);
+//select id, description, last_modif, title, createur_id from serie s, status t where t.id_user = 3 and  t.id_status = 0
+    // select * from serie where id in (select id_serie from status t where t.id_user = 3 and  t.id_status = 0)
+
     @Modifying
     @Transactional
     @Query(value = "update serie set title = :title, description =:description WHERE id= :id ", nativeQuery = true)

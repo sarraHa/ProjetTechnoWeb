@@ -58,8 +58,15 @@ public class SerieController {
             List<Serie> createdSeries = serieRepository.getSerieByUserId(currentUserID);
             System.out.println(createdSeries);
             model.addAttribute("series", createdSeries);
-            return "seriesTemplate";
+            List<Serie> readSeries = serieRepository.getReadSerieByUserId(currentUserID);
+            System.out.println("readSeriesreadSeriesreadSeriesreadSeries");
+            System.out.println(readSeries);
+            model.addAttribute("readSeries", readSeries);
 
+
+
+
+            return "seriesTemplate";
         }
         response.setStatus(401);
         return "logout";

@@ -1,3 +1,10 @@
+CREATE TABLE status (
+  id_serie INT ,
+  id_user INT ,
+  id_status INT
+);
+
+
 /*
 DROP TABLE IF EXISTS billionaires;
 
