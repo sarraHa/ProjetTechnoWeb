@@ -347,8 +347,13 @@ $(document).ready(function(){
 
                         </td>
                         <td>
-							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-						</td>
+                            <form th:action="@{'/serie/deleteSeries/'+${serie.id}}" th:method="POST">
+                                <button type="submit" class="" style="border: none; background: none;">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
+                            
+                        </td>
 					</tr>
 
 				</tbody>
@@ -443,6 +448,7 @@ $(document).ready(function(){
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form>
+                <p>window.varable</p>
 				<div class="modal-header">						
 					<h4 class="modal-title">Delete Employee</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

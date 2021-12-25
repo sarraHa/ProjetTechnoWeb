@@ -114,9 +114,8 @@ public class SerieController {
     }
 
     
+    /********************************************** UPDATE **********************************************/
 
-
-    
     @RequestMapping(value="/serie/updateSeries")
     public String updateSerie(Model model,  @RequestParam("id") Long id, HttpServletRequest servlet, HttpServletResponse response){
         System.out.println("updateSeriesupdateSeriesupdateSeries");
@@ -148,6 +147,23 @@ public class SerieController {
         response.setStatus(401);
         return "logout";
     }
+
+
+        /*********************************** delete ***********************************/
+
+        @RequestMapping(value="/serie/deleteSeries/{id}", method = RequestMethod.POST)
+        public String deleteSerie(Model model, @PathVariable("id") Long id ,HttpServletResponse response ){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                serieRepository.deleteById(id); // gererer l'expection ou cas ou le telet ne se passe pas bien
+                response.setStatus(202);
+                return "redirect:/series";
+            }
+            response.setStatus(401);
+            return "logout";
+        }
+    
+
 
     /******** */
      //creating a get mapping that retrieves the detail of a specific student  
