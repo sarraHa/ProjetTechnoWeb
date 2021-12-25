@@ -1,10 +1,16 @@
 package com.example.demo.repository;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import com.example.demo.Entity.Event;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 
 
@@ -12,14 +18,13 @@ import org.springframework.data.repository.CrudRepository;
 public interface EventRepository extends CrudRepository<Event,Long> {
 
     //List<Evenement> findByIdSerie(Long idSerie);
-
-    /*
-        @Modifying
+    
+    @Modifying
     @Transactional
-    @Query(value = "update evenement set date = :date, valeur =:valeur, commentaire = :commentaire WHERE id= :id ", nativeQuery = true)
-    void updateEvenement(@Param("id") Long id, @Param("date") Date date, @Param("valeur") Float valeur, @Param("commentaire") String commentaire);
+    @Query(value = "update event set date = :date, value =:value, comment = :comment WHERE id= :id ", nativeQuery = true)
+    void updateEvent(@Param("id") Long id,  @Param("value") Float value, @Param("date") Date date, @Param("comment") String comment);
 
-    */
+
 
 
 }

@@ -340,8 +340,9 @@ $(document).ready(function(){
 						<td th:text="${serie.description}"></td>
 						<td th:text="${serie.lastModif}"></td>
                         <td>
-                            <a th:href=@{/serie/openSeries(id=${serie.id})} class="edit" data-toggle=""><i class="material-icons" data-toggle="tooltip" title="Open">&#xE254;</i></a>
-						</td>
+                            <a th:href=@{/serie/openSeries(id=${serie.id})} class="edit" data-toggle=""><i class="material-icons" data-toggle="tooltip" title="Open" style="color: FF5733">&#xe2c8;</i></a>
+                            <i class="bi bi-files"></i>
+                        </td>
 						<td>
                             <a th:href=@{/serie/updateSeries(id=${serie.id})} class="edit" data-toggle=""><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 
@@ -349,7 +350,7 @@ $(document).ready(function(){
                         <td>
                             <form th:action="@{'/serie/deleteSeries/'+${serie.id}}" th:method="POST">
                                 <button type="submit" class="" style="border: none; background: none;">
-                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete" >&#xE872;</i>
                                 </button>
                             </form>
                             

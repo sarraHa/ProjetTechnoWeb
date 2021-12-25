@@ -65,7 +65,8 @@ public class SerieController {
         return "logout";
     } 
 
-   
+       /********************************************** Creat Serie **********************************************/
+
     
     @RequestMapping("/serie/createSeries")
     public String creatSerie(Model model, HttpServletRequest servlet, HttpServletResponse response){
@@ -177,6 +178,7 @@ public class SerieController {
             Optional<Serie> serie = serieRepository.findById(id);
             List<Event> events = serie.orElseThrow().getListEvent();
             System.out.println(events);
+            model.addAttribute("serieID", serie.orElseThrow().getId());
             model.addAttribute("serieTitle", serie.orElseThrow().getTitle());
             model.addAttribute("events", events);
             return "openSeriesTemplate";
