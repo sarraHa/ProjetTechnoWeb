@@ -40,7 +40,6 @@ public class SerieController {
     @Autowired
     UserRepository utilisateurRepository;
 
-    //creating a get mapping that retrieves all the students detail from the database   
 
 
     @RequestMapping("/series")
@@ -51,22 +50,18 @@ public class SerieController {
             String currentUser = authentication.getName();
             Optional<User> userOpt = utilisateurRepository.findByUsername(currentUser);
 
-            System.out.println(currentUser);
-            System.out.println("currentUserName");
+          
             User user = userOpt.get();
             System.out.println(user.getID());
 
-            //List<Serie> series = serieRepository.findByCreateur(user);
-            //System.out.println(series);
             long currentUserID = user.getID();
             List<Serie> createdSeries = serieRepository.getSerieByUserId(currentUserID);
             System.out.println(createdSeries);
             model.addAttribute("series", createdSeries);
             return "seriesTemplate";
-            //return "template2";
 
         }
-
+        response.setStatus(401);
         return "logout";
     } 
 
@@ -78,9 +73,8 @@ public class SerieController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return "createSeriesTemplate";
-            //return "template2";
-        
         }
+        response.setStatus(401);
         return "logout";
     }
 
@@ -88,30 +82,22 @@ public class SerieController {
     public String creatSerie(Model model, @RequestParam("title") String title, @RequestParam("description") String description, HttpServletRequest servlet, HttpServletResponse response ){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            System.out.println("/serie/create/serie/create/serie/create");
             if(title.isEmpty()){
-                title = "vide";
+                title = "";
             }
             if(description.isEmpty()){
-                description = "vide";
+                description = "";
             }
-
-
             String currentUser = authentication.getName();
             Optional<User> userOpt = utilisateurRepository.findByUsername(currentUser);
-
-            System.out.println(currentUser);
-            System.out.println("currentUserName");
             User user = userOpt.get();
             System.out.println(user.getID());
-
-            //List<Serie> series = serieRepository.findByCreateur(user);
-            //System.out.println(series);
             Serie s = new Serie(title,description,user);
             serieRepository.save(s);
             response.setStatus(201);
             return "redirect:/series";
         }
+        response.setStatus(401);
         return "logout";
 
 
@@ -127,7 +113,43 @@ public class SerieController {
     */
     }
 
+    
 
+
+    
+    @RequestMapping(value="/serie/updateSeries")
+    public String updateSerie(Model model,  @RequestParam("id") Long id, HttpServletRequest servlet, HttpServletResponse response){
+        System.out.println("updateSeriesupdateSeriesupdateSeries");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            Optional<Serie> serie = serieRepository.findById(id);
+            String title = serie.orElseThrow().getTitle();
+            String description = serie.get().getDescription();
+            model.addAttribute("id",id);
+            model.addAttribute("title",title);
+            model.addAttribute("description",description);
+            System.out.println(description);
+            return "updateSeriesTemplate";
+        }
+        response.setStatus(401);
+        return "logout";
+    }
+
+
+
+    @RequestMapping(value="/serie/updateSeries/{id}", method = RequestMethod.POST)
+    public String updateSerie(Model model, @PathVariable("id") Long id, @RequestParam("title") String title, @RequestParam("description") String description, HttpServletRequest servlet, HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            serieRepository.updateSerie(id,title,description);
+            response.setStatus(200);
+            return "redirect:/series";
+        }
+        response.setStatus(401);
+        return "logout";
+    }
+
+    /******** */
      //creating a get mapping that retrieves the detail of a specific student  
      @GetMapping("/serie/{id}")  
      private Serie getSerie(@PathVariable("id") Long id)   
