@@ -7,35 +7,37 @@ import javax.persistence.*;
 
 
 @Entity
-public class Evenement {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private float value;
+    private Date date;
+    private String comment;
+
+   
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "serie_id")
-    private Serie serieConteneur;
+    private Serie seriesContainer;
 
 
     //id serie
     //list de tags
-    private float valeur;
-    private Date date;
-    private String commentaire;
+ public Event(){}
 
-    public Evenement(){}
-
-    public Evenement(Date date, float valeur, String commentaire){
+    public Event(Date date, float value, String comment){
         this.date = date;
-        this.valeur = valeur;
-        this.commentaire = commentaire;
+        this.value = value;
+        this.comment = comment;
     }
 
-    public Evenement(Date date, float valeur, String commentaire, Serie serie){
+    public Event(Date date, float value, String comment, Serie serie){
         this.date = date;
-        this.valeur = valeur;
-        this.commentaire = commentaire;
-        this.serieConteneur = serie;
+        this.value = value;
+        this.comment = comment;
+        this.seriesContainer = serie;
     }
 
     /**
@@ -55,15 +57,15 @@ public class Evenement {
     /**
      * @return 
      */
-    public float getValeur() {
-        return valeur;
+    public float getValue() {
+        return value;
     }
 
     /**
-     * @param valeur 
+     * @param value 
      */
-    public void setValeur(float valeur) {
-        this.valeur = valeur;
+    public void setValue(float value) {
+        this.value = value;
     }
 
     /**
@@ -83,15 +85,15 @@ public class Evenement {
     /**
      * @return 
      */
-    public String getCommentaire() {
-        return commentaire;
+    public String getComment() {
+        return comment;
     }
 
     /**
-     * @param commentaire 
+     * @param comment 
      */
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }

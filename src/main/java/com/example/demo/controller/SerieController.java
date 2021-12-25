@@ -12,7 +12,7 @@ import com.example.demo.Entity.Serie;
 import com.example.demo.Entity.User;
 import com.example.demo.repository.SerieRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.Entity.Evenement;
+import com.example.demo.Entity.Event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -165,6 +165,34 @@ public class SerieController {
     
 
 
+
+
+    /********************************************** Open Series **********************************************/
+    @RequestMapping(value="/serie/openSeries")
+    public String openSerie(Model model,   @RequestParam("id") Long id, HttpServletRequest servlet, HttpServletResponse response){
+        System.out.println("openSeriesopenSeriesopenSeries");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+           
+            Optional<Serie> serie = serieRepository.findById(id);
+            List<Event> events = serie.orElseThrow().getListEvent();
+            System.out.println(events);
+            model.addAttribute("serieTitle", serie.orElseThrow().getTitle());
+            model.addAttribute("events", events);
+            return "openSeriesTemplate";
+        }
+        response.setStatus(401);
+        return "logout";
+
+
+      
+     
+    }
+
+
+
+
+
     /******** */
      //creating a get mapping that retrieves the detail of a specific student  
      @GetMapping("/serie/{id}")  
@@ -174,7 +202,7 @@ public class SerieController {
      }  
  
      @GetMapping("/getEvents/{idSerie}")  
-     private List<Evenement> getEvents(@PathVariable("idSerie") Long idSerie)   
+     private List<Event> getEvents(@PathVariable("idSerie") Long idSerie)   
      {  
          System.out.println("iciiiiiiiii");
          return serieService.getEventsBySerieId(idSerie);  

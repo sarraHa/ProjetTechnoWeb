@@ -15,8 +15,8 @@ public class Serie {
     private String description;
     private Date lastModif = new Date();
 
-    @OneToMany(mappedBy = "serieConteneur" , cascade = {CascadeType.ALL})
-    private List<Evenement> listEvenement = new ArrayList<>();
+    @OneToMany(mappedBy = "seriesContainer" , cascade = {CascadeType.ALL})
+    private List<Event> listEvent = new ArrayList<>();
 
     // faire en sort de creer une autre table droit pour enlever le createur de la table serie
     @ManyToOne(fetch = FetchType.LAZY)
@@ -90,17 +90,17 @@ public class Serie {
     }
 
      /**
-     * @return the listEvenement
+     * @return the listEvent
      */
-    public List<Evenement> getListEvenement() {
-        return listEvenement;
+    public List<Event> getListEvent() {
+        return listEvent;
     }
 
     /**
-     * @param listEvenement the listEvenement to set
+     * @param listEvent the listEvent to set
      */
-    public void setListEvenement(List<Evenement> listEvenement) {
-        this.listEvenement = listEvenement;
+    public void setListEvent(List<Event> listEvent) {
+        this.listEvent = listEvent;
     }
 
 

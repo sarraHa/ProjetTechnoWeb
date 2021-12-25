@@ -3,13 +3,13 @@ package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.repository.EvenementRepository;
+import com.example.demo.repository.EventRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.Entity.Serie;  
-import com.example.demo.Entity.Evenement;
+import com.example.demo.Entity.Event;
 
 
 /*
@@ -23,10 +23,10 @@ INSERT INTO serie (id, description, last_modif, titre) VALUES
 
 */ 
 @Service 
-public class EvenementService {
+public class EventService {
  
-    @Autowired  
-    EvenementRepository evenementRepository;  
+    //@Autowired  
+    //EventRepository eventRepository;  
 
     /*
     public List<Evenement> getEvenementByIdSerie(Long idSerie)   

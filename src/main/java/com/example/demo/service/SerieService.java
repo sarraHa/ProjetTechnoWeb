@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.Entity.Evenement;
+import com.example.demo.Entity.Event;
 import com.example.demo.Entity.Serie;  
 
 /*
@@ -44,10 +44,10 @@ public class SerieService {
 
     
 
-    public List<Evenement> getEventsBySerieId(Long idSerie)   
+    public List<Event> getEventsBySerieId(Long idSerie)   
     {  
         Optional<Serie> s = serieRepository.findById(idSerie);
-        return s.orElseThrow().getListEvenement();
+        return s.orElseThrow().getListEvent();
     }  
 
 }
