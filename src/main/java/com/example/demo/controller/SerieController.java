@@ -59,13 +59,12 @@ public class SerieController {
             System.out.println(createdSeries);
             model.addAttribute("series", createdSeries);
             List<Serie> readSeries = serieRepository.getReadSerieByUserId(currentUserID);
-            System.out.println("readSeriesreadSeriesreadSeriesreadSeries");
             System.out.println(readSeries);
             model.addAttribute("readSeries", readSeries);
 
-
-
-
+            List<Serie> editSeries = serieRepository.getEditSerieByUserId(currentUserID);
+            System.out.println(editSeries);
+            model.addAttribute("editSeries", editSeries);
             return "seriesTemplate";
         }
         response.setStatus(401);
@@ -191,13 +190,41 @@ public class SerieController {
             return "openSeriesTemplate";
         }
         response.setStatus(401);
-        return "logout";
-
-
-      
-     
+        return "logout";     
     }
 
+        /********************************************** Share Series **********************************************/
+        //th:href=@{/serie/shareSeries(id=${serie.id})} 
+        @RequestMapping(value="/serie/shareSeries")
+        public String shareSerie(Model model,   @RequestParam("serieID") Long serieID, HttpServletRequest servlet, HttpServletResponse response){
+            System.out.println("shareSeriesshareSeries");
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                model.addAttribute("serieID", serieID);
+                return "shareSeriesTemplate";
+            }
+            response.setStatus(401);
+            return "logout";     
+        }
+        
+        @RequestMapping(value="/serie/shareSeries/{serieID}", method = RequestMethod.POST)
+        public String shareSerie(Model model, @PathVariable("serieID") Long serieID, @RequestParam("username") String username, @RequestParam("status") int status, HttpServletRequest servlet, HttpServletResponse response){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                Optional<User> userOpt = utilisateurRepository.findByUsername(username);
+                User user = userOpt.get();
+                long userID = user.getID();
+                System.out.println("serieIDserieIDshareSeriesshareSeries");
+                serieRepository.shareSerie(serieID, userID,status);
+
+                response.setStatus(200);
+                return "redirect:/series";
+            }
+            response.setStatus(401);
+            return "logout";
+        }
+
+       
 
 
 
