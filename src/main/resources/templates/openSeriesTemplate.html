@@ -301,8 +301,8 @@ $(document).ready(function(){
 						<h2>Manage Serie : <b th:text="${serieTitle}"></b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a  th:href=@{/event/createEvent(id=${serieID})}  class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add Event</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+						<a th:if="${status != 0}" th:href=@{/event/createEvent(id=${serieID})}  class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add Event</span></a>
+						<a th:if="${status != 0}" href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
 				</div>
 			</div>
@@ -340,10 +340,10 @@ $(document).ready(function(){
 						<td th:text="${event.date}"></td>
 						<td th:text="${event.comment}"></td>
 						<td>
-                            <a th:href=@{/event/updateEvent(eventID=${event.id})} class="edit" data-toggle=""><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a th:if="${status != 0}" th:href=@{/event/updateEvent(eventID=${event.id})} class="edit" data-toggle=""><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         </td>
                         <td>
-                            <form th:action="@{'/event/deleteEvent/'+${event.id}}" th:method="POST">
+                            <form th:if="${status != 0}" th:action="@{'/event/deleteEvent/'+${event.id}}" th:method="POST">
                                 <button type="submit" class="" style="border: none; background: none;">
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>

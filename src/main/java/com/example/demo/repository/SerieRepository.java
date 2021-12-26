@@ -46,4 +46,14 @@ public interface  SerieRepository extends CrudRepository<Serie, Long>{
     void shareSerie(@Param("id_serie") Long id_serie, @Param("id_user") Long id_user, @Param("id_status") int id_status);
     
 
+    @Query(value = "SELECT id_status FROM  status WHERE id_serie= :id_serie and id_user= :id_user ", nativeQuery = true)
+    int getStatusSharedSeries(@Param("id_serie") Long id_serie, @Param("id_user") Long id_user);
+    
+    //
+        
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM status WHERE id_serie=:id_serie", nativeQuery = true)
+    void deleteFromStatus(@Param("id_serie") Long id_serie);
+
 }

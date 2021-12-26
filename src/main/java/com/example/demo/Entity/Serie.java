@@ -11,7 +11,7 @@ public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String title;
     private String description;
     private Date lastModif = new Date();
@@ -103,6 +103,14 @@ public class Serie {
     public void setListEvent(List<Event> listEvent) {
         this.listEvent = listEvent;
     }
+
+         /**
+     * @return the listEvent
+     */
+    public User getCreateur() {
+        return this.createur;
+    }
+
 
 
 

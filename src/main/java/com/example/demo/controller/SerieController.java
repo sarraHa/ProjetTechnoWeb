@@ -162,7 +162,8 @@ public class SerieController {
         public String deleteSerie(Model model, @PathVariable("id") Long id ,HttpServletResponse response ){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (!(authentication instanceof AnonymousAuthenticationToken)) {
-                serieRepository.deleteById(id); // gererer l'expection ou cas ou le telet ne se passe pas bien
+                serieRepository.deleteById(id); 
+                serieRepository.deleteFromStatus(id);
                 response.setStatus(202);
                 return "redirect:/series";
             }
@@ -181,13 +182,31 @@ public class SerieController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
            
+            String currentUser = authentication.getName();
+            Optional<User> userOpt = utilisateurRepository.findByUsername(currentUser);
+            User user = userOpt.get();
+            long currentUserID = user.getID();
+
             Optional<Serie> serie = serieRepository.findById(id);
+            User creatorUser = serie.orElseThrow().getCreateur();
+            int status = 0;
+
             List<Event> events = serie.orElseThrow().getListEvent();
             System.out.println(events);
             model.addAttribute("serieID", serie.orElseThrow().getId());
             model.addAttribute("serieTitle", serie.orElseThrow().getTitle());
             model.addAttribute("events", events);
-            return "openSeriesTemplate";
+            if(creatorUser.getID() == currentUserID ){
+                status = 1;
+                model.addAttribute("status", status);
+                return "openSeriesTemplate";
+            }else{
+       
+                status = serieRepository.getStatusSharedSeries(id, currentUserID);
+                model.addAttribute("status", status);
+                return "openSeriesTemplate";
+            }
+            
         }
         response.setStatus(401);
         return "logout";     
